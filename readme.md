@@ -53,8 +53,25 @@ func main() {
     }
 }
 ```
+Example to use Scenario
+If you use this, your notifications will continue to appear until you close it, and will stack if there are new notifications.
+```
+iconPath, _ := filepath.Abs("assets/trolley2.png")
 
+				notification := toast.Notification{
+					AppID:   "Chrome",
+					Title:   "🛒 Order Online \n📜 Invoice: INV0002311\n",
+					Message: "👤 Customer: HERU BASKORO",
+					Icon:    iconPath,
+					Audio:   toast.Mail, 
+					Scenario: "reminder", // 🆕 add this
+					Actions: []toast.Action{
+						{Type: "protocol", Label: "🔗 Opem mail", Arguments: "https://gmail.com"},
+					},
+```
 ## Screenshots
+![image](https://github.com/user-attachments/assets/32cab306-9445-4dc0-a5e7-28d86a73ac89)
+
 
 ![Toast](./screenshot-toast.png)
 
