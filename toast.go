@@ -69,7 +69,7 @@ func init() {
 $APP_ID = '{{if .AppID}}{{.AppID}}{{else}}Windows App{{end}}'
 
 $template = @"
-<toast activationType="{{.ActivationType}}" launch="{{.ActivationArguments}}" duration="{{.Duration}}">
+<toast activationType="{{.ActivationType}}" launch="{{.ActivationArguments}}" duration="{{.Duration}}" scenario="{{.Scenario}}">
     <visual>
         <binding template="ToastGeneric">
             {{if .Icon}}
@@ -175,6 +175,9 @@ type Notification struct {
 
 	// How long the toast should show up for (short/long)
 	Duration toastDuration
+
+	// make as a reminder, so that notifications do not close automatically
+	Scenario string
 }
 
 // Action
@@ -202,6 +205,9 @@ func (n *Notification) applyDefaults() {
 	}
 	if n.Audio == "" {
 		n.Audio = Default
+	}
+	if n.Scenario == "" { 
+		n.Scenario = "reminder"
 	}
 }
 
